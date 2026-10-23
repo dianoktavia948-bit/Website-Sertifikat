@@ -1215,17 +1215,11 @@ document.getElementById('pdf').onclick=()=>{
   document.getElementById('status').textContent='PDF gagal dibuat: '+e.message;
   alert('PDF gagal dibuat. Coba refresh halaman lalu ulangi. Detail: '+e.message);
 
-<script>
-  // Tombol Logout
   const logoutButton = document.getElementById('logout-button');
   if (logoutButton) {
     logoutButton.addEventListener('click', () => {
       localStorage.removeItem('isLoggedIn');
       window.location.href = 'login.html';
-    });
-  }
-</script>
-  
  }
 };
 </script></body></html>
