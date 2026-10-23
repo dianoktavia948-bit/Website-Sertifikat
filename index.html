@@ -1,7 +1,7 @@
 <html lang="id"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Generator Sertifikat Satker BPJS Kesehatan</title>
- <link rel="icon" type="image/jpg" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTple7UQwCkkFMJpQdeC7HIHTIRdWKGAWcUmwfKMss5Q&s=10">
+ <link rel="icon" type="image/jpg" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTple7UQwCkkFMJpQdeC7HIHTIRdWKGAWcUmwfKMss5Q&amp;s=10">
 <style>
 :root{--bpjs-blue:#0756a4;--bpjs-blue2:#0b75bd;--bpjs-green:#00a86b;--ink:#173b61;--muted:#667d95;--line:#dce8f3;--bg:#f2f7fc}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#f5f9ff,#edf8f4);font-family:Inter,Arial,sans-serif;color:var(--ink)}
@@ -524,7 +524,7 @@ body:not(.preview-mode) .field-group select#satker:invalid{color:#71849a}
       <div class="captcha-block">
         <label for="captcha-input">Kode CAPTCHA</label>
         <div class="captcha-row">
-          <div id="captcha-code" class="captcha-code" aria-label="Kode CAPTCHA">K53ZB</div>
+          <div id="captcha-code" class="captcha-code" aria-label="Kode CAPTCHA">WV3GE</div>
           <button type="button" id="refresh-captcha" class="captcha-refresh" aria-label="Ganti kode CAPTCHA" title="Ganti kode CAPTCHA">↻</button>
         </div>
         <input id="captcha-input" name="captcha" autocomplete="off" placeholder="Ketik kode di atas" required="">
@@ -625,7 +625,7 @@ body:not(.preview-mode) .field-group select#satker:invalid{color:#71849a}
 <button type="button" class="satker-option" data-name="LIMA KAUM II"><span>LIMA KAUM II</span><small class="satker-number" aria-label="Nomor sertifikat" title=""></small></button>
 <button type="button" class="satker-option" data-name="SUNGAYANG"><span>SUNGAYANG</span><small class="satker-number" aria-label="Nomor sertifikat" title=""></small></button>
 <button type="button" class="satker-option" data-name="TANJUNG EMAS"><span>TANJUNG EMAS</span><small class="satker-number" aria-label="Nomor sertifikat" title=""></small></button>
-<button type="button" class="satker-option" data-name="PAGARUYUNG"><span>PAGARUYUNG</span><small class="satker-number" aria-label="Nomor sertifikat" title=""></small></button>
+<button type="button" class="satker-option has-number" data-name="PAGARUYUNG"><span>PAGARUYUNG</span><small class="satker-number" aria-label="Nomor sertifikat" title="0001/SER-PN/0304/1026">0001</small></button>
 <button type="button" class="satker-option" data-name="LINTAU BUO UTARA II"><span>LINTAU BUO UTARA II</span><small class="satker-number" aria-label="Nomor sertifikat" title=""></small></button>
 <button type="button" class="satker-option" data-name="SUNGAI TARAB I"><span>SUNGAI TARAB I</span><small class="satker-number" aria-label="Nomor sertifikat" title=""></small></button>
 <button type="button" class="satker-option" data-name="SUNGAI TARAB II"><span>SUNGAI TARAB II</span><small class="satker-number" aria-label="Nomor sertifikat" title=""></small></button>
@@ -1197,6 +1197,39 @@ document.getElementById('new-certificate').addEventListener('click',function(){
   draw();
   window.scrollTo({top:0,behavior:'smooth'});
 });
+ document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('login-form');
+    const loginScreen = document.getElementById('login-screen');
+    const appHeader = document.getElementById('app-header');
+    const certificateScreen = document.getElementById('certificate-screen');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah form melakukan reload halaman secara default
+            // Ambil nilai dari input (opsional: tambahkan validasi username/password/captcha di sini)
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const captchaInput = document.getElementById('captcha-input').value.trim();
+
+            // Contoh validasi sederhana (sesuaikan dengan kebutuhan backend/logika Anda)
+            if (username === "" || password === "") {
+                alert("Username dan password wajib diisi!");
+                return;
+            }
+            // Jika login berhasil / validasi terpenuhi:
+            // 1. Sembunyikan layar login
+            loginScreen.style.display = 'none';
+            // 2. Tampilkan header aplikasi
+            appHeader.style.display = 'flex';
+            // 3. Pastikan layar sertifikat / form utama tampil
+            if (certificateScreen) {
+                certificateScreen.style.display = 'block';
+            }
+            // (Opsional) Simpan status login ke localStorage jika ingin sesi tetap diingat
+            localStorage.setItem('isLoggedIn', 'true');
+        });
+    }
+});
 
 function makePdfFromCanvas(canvas){
  const jpgUrl=canvas.toDataURL('image/jpeg',0.96);
@@ -1251,4 +1284,5 @@ document.getElementById('pdf').onclick=()=>{
   alert('PDF gagal dibuat. Coba refresh halaman lalu ulangi. Detail: '+e.message);
  }
 };
-</script></body></html>
+</script>
+</body></html>
